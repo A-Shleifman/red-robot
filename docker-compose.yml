@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    container_name: red_robot_backend
+    restart: always
+    tty: true
+    volumes:
+      - ./src:/app/src
+      - ./tsconfig.json:/app/tsconfig.json
+    ports:
+      - 3000
+    labels:
+      traefik.http.routers.red-robot.rule: Host(`${DOMAIN}`) && PathPrefix(`/api`)
+      traefik.http.routers.red-robot.middlewares: api-stripprefix
+      traefik.http.routers.red-robot.entrypoints: websecure
+      traefik.http.routers.red-robot.tls.certresolver: cfdnsresolver
+      traefik.http.routers.red-robot.tls.domains[0].main: ${DOMAIN}
+      traefik.http.routers.red-robot.tls.domains[0].sans: www.${DOMAIN}
+
+networks:
+  default:
+    external:
+      name: traefik
