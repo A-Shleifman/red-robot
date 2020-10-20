@@ -1,3 +1,5 @@
+import RobotDestroyedError from 'entities/errors/RobotDestroyedError';
+
 export enum Orientation {
   NORTH,
   EAST,
@@ -11,6 +13,7 @@ export default class Robot {
   #x: number;
   #y: number;
   #orientation: Orientation;
+  #isDestroyed = false;
 
   constructor(x: number, y: number, orientation: Orientation = Orientation.NORTH) {
     this.#x = x;
@@ -23,32 +26,56 @@ export default class Robot {
   }
 
   turnLeft() {
+    if (this.#isDestroyed) throw new RobotDestroyedError();
+
     this.#orientation = (this.#orientation - 1 + orientationCount) % orientationCount;
 
     return this;
   }
 
   turnRight() {
+    if (this.#isDestroyed) throw new RobotDestroyedError();
+
     this.#orientation = (this.#orientation + 1) % orientationCount;
 
     return this;
   }
 
-  forward() {
+  peekForward() {
+    if (this.#isDestroyed) throw new RobotDestroyedError();
+
+    let x = this.#x;
+    let y = this.#y;
+
     switch (this.#orientation) {
       case Orientation.NORTH:
-        this.#y += 1;
+        y++;
         break;
       case Orientation.SOUTH:
-        this.#y -= 1;
+        y--;
         break;
       case Orientation.EAST:
-        this.#x += 1;
+        x++;
         break;
       case Orientation.WEST:
-        this.#x -= 1;
+        x--;
         break;
     }
+
+    return { x, y };
+  }
+
+  forward() {
+    const { x, y } = this.peekForward();
+
+    this.#x = x;
+    this.#y = y;
+
+    return this;
+  }
+
+  destroy() {
+    this.#isDestroyed = true;
 
     return this;
   }

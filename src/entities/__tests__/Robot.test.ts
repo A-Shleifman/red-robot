@@ -1,3 +1,4 @@
+import RobotDestroyedError from 'entities/errors/RobotDestroyedError';
 import Robot, { Orientation } from 'entities/Robot';
 
 it('returns position', () => {
@@ -28,31 +29,54 @@ it('turns right correctly', () => {
   expect(robot.turnRight().position.orientation).toEqual(Orientation.NORTH);
 });
 
-it('moves forward in the right direction', () => {
+it('calculates the next step', () => {
   const x = 10;
   const y = 10;
 
-  expect(new Robot(x, y, Orientation.NORTH).forward().position).toEqual({
+  expect(new Robot(x, y, Orientation.NORTH).peekForward()).toEqual({
     x,
     y: y + 1,
-    orientation: Orientation.NORTH,
   });
+
+  expect(new Robot(x, y, Orientation.EAST).peekForward()).toEqual({
+    x: x + 1,
+    y,
+  });
+
+  expect(new Robot(x, y, Orientation.SOUTH).peekForward()).toEqual({
+    x,
+    y: y - 1,
+  });
+
+  expect(new Robot(x, y, Orientation.WEST).peekForward()).toEqual({
+    x: x - 1,
+    y,
+  });
+});
+
+it('moves forward to the calculated coords', () => {
+  const x = 10;
+  const y = 10;
 
   expect(new Robot(x, y, Orientation.EAST).forward().position).toEqual({
     x: x + 1,
     y,
     orientation: Orientation.EAST,
   });
+});
 
-  expect(new Robot(x, y, Orientation.SOUTH).forward().position).toEqual({
-    x,
-    y: y - 1,
-    orientation: Orientation.SOUTH,
+describe('throws exception on invalid moves', () => {
+  const robot = new Robot(0, 0).destroy();
+
+  test('on turnLeft', () => {
+    expect(() => robot.turnLeft()).toThrow(RobotDestroyedError);
   });
 
-  expect(new Robot(x, y, Orientation.WEST).forward().position).toEqual({
-    x: x - 1,
-    y,
-    orientation: Orientation.WEST,
+  test('on turnRight', () => {
+    expect(() => robot.turnRight()).toThrow(RobotDestroyedError);
+  });
+
+  test('on forward', () => {
+    expect(() => robot.forward()).toThrow(RobotDestroyedError);
   });
 });

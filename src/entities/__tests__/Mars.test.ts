@@ -1,6 +1,6 @@
-import ExceededMaxRowCountError from 'entities/exceptions/ExceededMaxColCountError';
-import ExceededMaxColCountError from 'entities/exceptions/ExceededMaxRowCountError';
-import FallAlreadyRegisteredError from 'entities/exceptions/FallAlreadyRegisteredError';
+import ExceededMaxRowCountError from 'entities/errors/ExceededMaxColCountError';
+import ExceededMaxColCountError from 'entities/errors/ExceededMaxRowCountError';
+import FallAlreadyRegisteredError from 'entities/errors/FallAlreadyRegisteredError';
 import Mars from 'entities/Mars';
 import Robot from 'entities/Robot';
 
