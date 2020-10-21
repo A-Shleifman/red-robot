@@ -10,7 +10,7 @@ services:
       - ./src:/app/src
       - ./tsconfig.json:/app/tsconfig.json
     ports:
-      - 3000
+      - 3000:3000
     labels:
       traefik.http.routers.red-robot.rule: Host(`${DOMAIN}`) && PathPrefix(`/api`)
       traefik.http.routers.red-robot.middlewares: api-stripprefix
