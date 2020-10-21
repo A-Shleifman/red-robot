@@ -2,8 +2,8 @@ import { Orientation } from 'entities/Robot';
 
 export type UUID = string;
 
-export interface Position {
-  x: number;
-  y: number;
-  position: Orientation;
+export enum RobotMove {
+  TURN_LEFT,
+  TURN_RIGHT,
+  FORWARD,
 }

@@ -82,3 +82,8 @@ describe('ignores invalid moves', () => {
     expect(robot.forward().position).toEqual({ x, y, orientation: Orientation.NORTH });
   });
 });
+
+it('serializes instance to JSON', () => {
+  const mars = new Robot(10, 10, Orientation.EAST);
+  expect(mars.toJSON()).toEqual({ x: 10, y: 10, orientation: 1, isDestroyed: false });
+});

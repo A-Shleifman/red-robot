@@ -83,4 +83,13 @@ export default class Robot {
 
     return this;
   }
+
+  toJSON() {
+    return {
+      x: this.#x,
+      y: this.#y,
+      orientation: this.#orientation,
+      isDestroyed: this.#isDestroyed,
+    };
+  }
 }

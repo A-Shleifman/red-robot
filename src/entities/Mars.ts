@@ -48,4 +48,10 @@ export default class Mars {
 
     this.#fallMap.add(coords);
   }
+
+  toJSON() {
+    return {
+      id: this.#id,
+    };
+  }
 }

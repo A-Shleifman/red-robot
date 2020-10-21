@@ -46,3 +46,8 @@ it('registers a fall only once', () => {
 
   expect(() => mars.registerFall(2, 3)).toThrow(FallAlreadyRegisteredError);
 });
+
+it('serializes instance to JSON', () => {
+  const mars = new Mars(10, 10);
+  expect(mars.toJSON()).toEqual({ id: mars.id });
+});
