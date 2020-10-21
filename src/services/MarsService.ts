@@ -1,5 +1,5 @@
 import Mars from 'entities/Mars';
-import Robot from 'entities/Robot';
+import Robot, { Orientation } from 'entities/Robot';
 import { getMarsInstance, registerMarsInstance } from 'store/MarsStore';
 import { UUID } from 'types';
 
@@ -16,7 +16,7 @@ export default class MarsService {
     return getMarsInstance(id);
   }
 
-  placeNewRobot(id: UUID, robot: Robot) {
-    getMarsInstance(id).placeNewRobot(robot);
+  placeNewRobot(id: UUID, x: number, y: number, orientation: Orientation) {
+    getMarsInstance(id).placeNewRobot(new Robot(x, y, orientation));
   }
 }

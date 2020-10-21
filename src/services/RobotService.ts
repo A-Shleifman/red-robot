@@ -38,14 +38,12 @@ export default class RobotService {
       return mars.robot.forward();
     }
 
-    if (!mars.isValidCoord(x, y)) {
-      try {
-        mars.registerFall(x, y);
-        mars.robot.destroy();
-      } catch (e) {
-        if (!(e instanceof FallAlreadyRegisteredError)) {
-          throw e;
-        }
+    try {
+      mars.registerFall(x, y);
+      mars.robot.destroy();
+    } catch (e) {
+      if (!(e instanceof FallAlreadyRegisteredError)) {
+        throw e;
       }
     }
 

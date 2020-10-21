@@ -25,8 +25,12 @@ export default class Robot {
     return { x: this.#x, y: this.#y, orientation: this.#orientation };
   }
 
+  get isDestroyed() {
+    return this.#isDestroyed;
+  }
+
   turnLeft() {
-    if (this.#isDestroyed) throw new RobotDestroyedError();
+    if (this.#isDestroyed) return this;
 
     this.#orientation = (this.#orientation - 1 + orientationCount) % orientationCount;
 
@@ -34,7 +38,7 @@ export default class Robot {
   }
 
   turnRight() {
-    if (this.#isDestroyed) throw new RobotDestroyedError();
+    if (this.#isDestroyed) return this;
 
     this.#orientation = (this.#orientation + 1) % orientationCount;
 
@@ -42,8 +46,6 @@ export default class Robot {
   }
 
   peekForward() {
-    if (this.#isDestroyed) throw new RobotDestroyedError();
-
     let x = this.#x;
     let y = this.#y;
 
@@ -66,6 +68,8 @@ export default class Robot {
   }
 
   forward() {
+    if (this.#isDestroyed) return this;
+
     const { x, y } = this.peekForward();
 
     this.#x = x;

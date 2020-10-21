@@ -36,7 +36,7 @@ export default class Mars {
   }
 
   isValidCoord(x: number, y: number) {
-    return x >= 0 && x < this.#cols && y >= 0 && y < this.#rows;
+    return x >= 0 && x <= this.#cols && y >= 0 && y <= this.#rows;
   }
 
   registerFall(x: number, y: number) {

@@ -7,8 +7,9 @@
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run start:prod; else npm run start:dev; fi",
     "start:prod": "ts-node -r tsconfig-paths/register src",
     "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn  --poll src",
-    "test": "jest src --coverage",
-    "test:watch": "jest src --watch"
+    "cli": "ts-node -r tsconfig-paths/register src/cli/robot-cli",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "author": "Alex Shleifman",
   "license": "ISC",

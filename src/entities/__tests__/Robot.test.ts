@@ -65,18 +65,20 @@ it('moves forward to the calculated coords', () => {
   });
 });
 
-describe('throws exception on invalid moves', () => {
-  const robot = new Robot(0, 0).destroy();
+describe('ignores invalid moves', () => {
+  const x = 5;
+  const y = 5;
+  const robot = new Robot(x, y).destroy();
 
   test('on turnLeft', () => {
-    expect(() => robot.turnLeft()).toThrow(RobotDestroyedError);
+    expect(robot.turnLeft().position).toEqual({ x, y, orientation: Orientation.NORTH });
   });
 
   test('on turnRight', () => {
-    expect(() => robot.turnRight()).toThrow(RobotDestroyedError);
+    expect(robot.turnRight().position).toEqual({ x, y, orientation: Orientation.NORTH });
   });
 
   test('on forward', () => {
-    expect(() => robot.forward()).toThrow(RobotDestroyedError);
+    expect(robot.forward().position).toEqual({ x, y, orientation: Orientation.NORTH });
   });
 });

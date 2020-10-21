@@ -31,10 +31,10 @@ it('validates coordinates', () => {
 
   expect(mars.isValidCoord(0, 0)).toEqual(true);
   expect(mars.isValidCoord(25, 25)).toEqual(true);
-  expect(mars.isValidCoord(49, 49)).toEqual(true);
+  expect(mars.isValidCoord(50, 50)).toEqual(true);
 
-  expect(mars.isValidCoord(50, 0)).toEqual(false);
-  expect(mars.isValidCoord(0, 50)).toEqual(false);
+  expect(mars.isValidCoord(51, 0)).toEqual(false);
+  expect(mars.isValidCoord(0, 51)).toEqual(false);
   expect(mars.isValidCoord(-1, 0)).toEqual(false);
   expect(mars.isValidCoord(0, -1)).toEqual(false);
 });

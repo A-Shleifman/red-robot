@@ -1,8 +1,8 @@
 import Mars from 'entities/Mars';
-import Robot from 'entities/Robot';
+import Robot, { Orientation } from 'entities/Robot';
 import MarsService from 'services/MarsService';
 import { getMarsInstance, registerMarsInstance } from 'store/MarsStore';
-import { mocked } from 'ts-jest';
+import { mocked } from 'ts-jest/utils';
 import * as uuid from 'uuid';
 
 jest.mock('store/MarsStore');
@@ -29,11 +29,10 @@ it('retrieves mars instance by id', () => {
 
 it('allows to place a new robot', () => {
   const mars = new Mars(10, 10);
-  const robot = new Robot(3, 3);
 
   mocked(getMarsInstance).mockImplementation(() => mars);
 
-  marsService.placeNewRobot(uuid.v4(), robot);
+  marsService.placeNewRobot(uuid.v4(), 3, 3, Orientation.EAST);
 
-  expect(mars.robot).toBe(robot);
+  expect(mars.robot!.position).toEqual({ x: 3, y: 3, orientation: Orientation.EAST });
 });
