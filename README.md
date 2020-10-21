@@ -91,3 +91,13 @@ curl --location --request POST 'red-robot.optimisedsoftware.co.uk/api/robot/move
 --header 'Content-Type: application/json' \
 --data-raw '{"move": 2, "planetId": "planet-uuid-from-the-first-request"}'
 ```
+
+# Things to improve
+
+With the limited time for this project there are obviously some things that are left out and there's always room for improvement:
+
+- add a logger to replace `console.log` for the cli app
+- validate API request body
+- add e2e test for the API endpoints
+- create a React UI to consume the API and to interface the app in a move user-friendly way
+- make error construction more reusable
